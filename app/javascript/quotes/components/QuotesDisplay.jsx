@@ -29,7 +29,7 @@ class QuotesDisplay extends Component {
       // assign quote ID from the URL's query string
       this.quoteId = Number(this.qsParams.quote);
     } else {
-      this.quoteId = 1;
+      this.quoteId = this.props.startingQuoteId;
       // update URL in browser to reflect current quotein query string
       this.props.history.push(`/?quote=${this.quoteId}`);
     }
@@ -46,11 +46,23 @@ class QuotesDisplay extends Component {
   }
 
   render() {
-    const nextQuoteId = Number(this.state.quote.id) + 1;
+    const quote = this.state.quote;
+    const nextQuoteId = quote.next_id;
+    const previousQuoteId = quote.previous_id;
 
     return(
       <div>
-        <Link to={`/?quote=${nextQuoteId}`}>Next</Link>
+        {previousQuoteId &&
+          <Link to={`/?quote=${previousQuoteId}`}>
+            Previous
+          </Link>
+        }
+        <br/>
+        {nextQuoteId &&
+          <Link to={`/?quote=${nextQuoteId}`}>
+            Next
+         </Link>
+        }
         <p>{ this.state.quote.text }</p>
         <p>{ this.state.quote.author }</p>
       </div>
