@@ -5,15 +5,16 @@ import {
 } from 'react-router-dom'
 import QuotesDisplay from './QuotesDisplay'
 
-const App = (props) => (
-  <Router>
+const App = props => (
+  <Router startingQuoteId={props.startingQuoteId}>
     <div>
       <Route
-        path='/'
-        component={QuotesDisplay}
+        path="/"
+        startingQuoteId={props.startingQuoteId}
+        render={routeProps => <QuotesDisplay {...props} {...routeProps} />}
       />
     </div>
   </Router>
-)
+);
 
 export default App
