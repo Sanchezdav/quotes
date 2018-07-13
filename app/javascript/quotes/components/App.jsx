@@ -9,7 +9,7 @@ const App = (props) => (
   <Router>
     <div>
       <Route
-        path='/',
+        path='/'
         component={QuotesDisplay}
       />
     </div>
